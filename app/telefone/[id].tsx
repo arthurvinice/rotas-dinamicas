@@ -3,6 +3,19 @@ import { useLayoutEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+
+const globalData = {
+  id: '1',
+  name: 'Mock 1',
+  data: {
+    color: 'Cor 1',
+    capacity: 'Capacidade 1',
+    price: 'R$ 5000,00',
+    generation: 'Geração 1',
+    year: 2023,
+  },
+}
+
 export default function TelefoneDetalhe() {
   const { id } = useLocalSearchParams();
 
@@ -10,7 +23,7 @@ export default function TelefoneDetalhe() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: `Detalhe do telefone: ${id}`,
+      title: `Detalhe do telefone: ${globalData.name}`,
     });
   }, [navigation, id]);
 

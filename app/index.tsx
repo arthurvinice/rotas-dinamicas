@@ -31,6 +31,13 @@ const globalData: ItemType[] = Array.from({ length: 10 }, (_, i) => ({
   },
 }));
 
+//função para chamar a API e obter os dados
+const fetchData = async () => {
+  const response = await fetch('https://api.restful-api.dev/objects');
+  const data = await response.json();
+  return data;
+}; 
+
 export default function Index() {
 
   const [data, setData] = useState<ItemType[]>([]);
