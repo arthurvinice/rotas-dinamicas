@@ -47,19 +47,19 @@ export default function TelefoneDetalhe() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: `Detalhe do telefone: ${globalData.name}`,
+      title: `Detalhe do telefone: ${data[0]?.name}`,
     });
   }, [navigation, id]);
 
   return (
     <View style={styles.container}>
-      <Text variant="bodyLarge">ID: {globalData.id}</Text>
-      <Text variant="titleLarge">Nome: {globalData.name}</Text>
-      <Text variant="bodyMedium">Cor: {globalData.data.color}</Text>
-      <Text variant="bodyMedium">Capacidade: {globalData.data.capacity}</Text>
-      <Text variant="bodyMedium">Preço: {globalData.data.price}</Text>
-      <Text variant="bodyMedium">Geração: {globalData.data.generation}</Text>
-      <Text variant="bodyMedium">Ano: {globalData.data.year}</Text>
+      <Text variant="bodyLarge">ID: {data[0]?.id}</Text>
+      <Text variant="titleLarge">Nome: {data[0]?.name}</Text>
+      <Text variant="bodyMedium">Cor: {data[0]?.data.color}</Text>
+      <Text variant="bodyMedium">Capacidade: {data[0]?.data.capacity}</Text>
+      <Text variant="bodyMedium">Preço: {data[0]?.data.price}</Text>
+      <Text variant="bodyMedium">Geração: {data[0]?.data.generation}</Text>
+      <Text variant="bodyMedium">Ano: {data[0]?.data.year}</Text>
     </View>
   );
 }
