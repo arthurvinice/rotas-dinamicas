@@ -60,7 +60,6 @@ export default function TelefoneDetalhe() {
       <Text variant="bodyMedium">Preço: {globalData.data.price}</Text>
       <Text variant="bodyMedium">Geração: {globalData.data.generation}</Text>
       <Text variant="bodyMedium">Ano: {globalData.data.year}</Text>
-      {isLoading && <Text variant="bodyLarge">Carregando...</Text>}
     </View>
   );
 }
