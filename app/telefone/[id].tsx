@@ -1,10 +1,21 @@
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
+interface ItemType {
+  id: string;
+  name: string;
+  data: {
+    color: string;
+    capacity: string;
+    price: string;
+    generation: string;
+    year: number;
+  };
+}
 
-const globalData = {
+const globalData: ItemType = {
   id: '1',
   name: 'Mock 1',
   data: {
@@ -20,6 +31,19 @@ export default function TelefoneDetalhe() {
   const { id } = useLocalSearchParams();
 
   const navigation = useNavigation();
+  
+  const [data, setData] = useState<ItemType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+      setTimeout(() => {
+        // Simula uma chamada a uma API
+        setData([globalData]);
+        setIsLoading(false);
+      },
+      3000); //simula um atraso de 3 segundos
+    },[])
+  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -29,7 +53,14 @@ export default function TelefoneDetalhe() {
 
   return (
     <View style={styles.container}>
-      <Text variant="bodyLarge">ID: {id}</Text>
+      <Text variant="bodyLarge">ID: {globalData.id}</Text>
+      <Text variant="titleLarge">Nome: {globalData.name}</Text>
+      <Text variant="bodyMedium">Cor: {globalData.data.color}</Text>
+      <Text variant="bodyMedium">Capacidade: {globalData.data.capacity}</Text>
+      <Text variant="bodyMedium">Preço: {globalData.data.price}</Text>
+      <Text variant="bodyMedium">Geração: {globalData.data.generation}</Text>
+      <Text variant="bodyMedium">Ano: {globalData.data.year}</Text>
+      {isLoading && <Text variant="bodyLarge">Carregando...</Text>}
     </View>
   );
 }
