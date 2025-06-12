@@ -17,6 +17,7 @@ type ItemType = {
 
 // Exemplo de dados para o FlatList
 // precisamos converter isso em uma chamada a uma API (https://api.restful-api.dev/objects)
+// também vamos usar esse https://api.restful-api.dev/objects/7
 // removeremos isso após programarmos a chamada à API
 const globalData: ItemType[] = Array.from({ length: 10 }, (_, i) => ({
   id: `${i}`,
