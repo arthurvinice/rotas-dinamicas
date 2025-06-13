@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import axios from 'axios';
+import { ItemType } from '@/types';
 
 
 export default function TelefoneDetalhe() {
@@ -32,6 +33,14 @@ export default function TelefoneDetalhe() {
     });
   }, [navigation, id]);
 
+  if (isLoading) {
+      return (
+        <View style={styles.carregando}>
+          <Text variant="bodyLarge">Carregando...</Text>
+        </View>
+      );
+    }
+
   return (
     <View style={styles.container}>
       <Text variant="bodyLarge">ID: {data[0]?.id}</Text>
@@ -50,5 +59,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'flex-start',
+  },
+  carregando: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
