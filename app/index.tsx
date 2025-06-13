@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import axios from 'axios';
+import { ItemType } from "../types";
 
 // ajusta as dimensões do card para o tamanho da tela
 // não esqueça de dar um F5 no navegador para ver as mudanças
@@ -10,11 +11,6 @@ const CARD_MARGIN = 8;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const CARD_WIDTH = SCREEN_WIDTH / 2 - CARD_MARGIN * 3;
 
-type ItemType = {
-  id: string;
-  name: string;
-  data: Record<string, any>;
-};
 
 // Exemplo de dados para o FlatList
 // precisamos converter isso em uma chamada a uma API (https://api.restful-api.dev/objects)
