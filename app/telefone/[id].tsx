@@ -2,30 +2,8 @@ import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
+import axios from 'axios';
 
-interface ItemType {
-  id: string;
-  name: string;
-  data: {
-    color: string;
-    capacity: string;
-    price: string;
-    generation: string;
-    year: number;
-  };
-}
-
-const globalData: ItemType = {
-  id: '1',
-  name: 'Mock 1',
-  data: {
-    color: 'Cor 1',
-    capacity: 'Capacidade 1',
-    price: 'R$ 5000,00',
-    generation: 'Geração 1',
-    year: 2023,
-  },
-}
 
 export default function TelefoneDetalhe() {
   const { id } = useLocalSearchParams();
@@ -35,13 +13,16 @@ export default function TelefoneDetalhe() {
   const [data, setData] = useState<ItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  //função para chamar a API e obter os dados
+  async function buscarDadosEspecificos() {
+    setIsLoading(true);
+    const resultado = await axios.get('https://api.restful-api.dev/objects/' + id);
+    setData(resultado.data);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
-      setTimeout(() => {
-        // Simula uma chamada a uma API
-        setData([globalData]);
-        setIsLoading(false);
-      },
-      3000); //simula um atraso de 3 segundos
+      buscarDadosEspecificos();
     },[])
   
 
