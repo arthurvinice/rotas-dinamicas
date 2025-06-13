@@ -2,6 +2,7 @@ import { Link } from "expo-router";
 import { useEffect, useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
+import axios from 'axios';
 
 // ajusta as dimensões do card para o tamanho da tela
 // não esqueça de dar um F5 no navegador para ver as mudanças
@@ -36,20 +37,23 @@ const fetchData = async () => {
   const response = await fetch('https://api.restful-api.dev/objects');
   const data = await response.json();
   return data;
-}; 
+};
 
 export default function Index() {
 
   const [data, setData] = useState<ItemType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
+  async function buscarDados() {
+    const resultado = await axios.get('https://api.restful-api.dev/objects');
+    setData(resultado.data);
+    setIsLoading(false);
+  }
+
+
   useEffect(() => {
-    setTimeout(() => {
-      // Simula uma chamada a uma API
-      setData(globalData);
-      setIsLoading(false);
-    },
-    3000); //simula um atraso de 3 segundos
+    buscarDados();
   },[])
 
   const renderItem = ({ item }: { item: ItemType }) => (
