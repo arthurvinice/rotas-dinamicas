@@ -46,6 +46,7 @@ export default function Index() {
 
 
   async function buscarDados() {
+    setIsLoading(true);
     const resultado = await axios.get('https://api.restful-api.dev/objects');
     setData(resultado.data);
     setIsLoading(false);
