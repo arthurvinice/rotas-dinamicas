@@ -11,7 +11,7 @@ export default function TelefoneDetalhe() {
 
   const navigation = useNavigation();
   
-  const [data, setData] = useState<ItemType[]>([]);
+  const [data, setData] = useState<ItemType | null >(null);
   const [isLoading, setIsLoading] = useState(true);
 
   //função para chamar a API e obter os dados
@@ -29,7 +29,7 @@ export default function TelefoneDetalhe() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: `Detalhe do telefone: ${data[0]?.name}`,
+      title: `Detalhe do telefone: ${data?.name || ''}`,
     });
   }, [navigation, id]);
 
@@ -43,13 +43,13 @@ export default function TelefoneDetalhe() {
 
   return (
     <View style={styles.container}>
-      <Text variant="bodyLarge">ID: {data[0]?.id}</Text>
-      <Text variant="titleLarge">Nome: {data[0]?.name}</Text>
-      <Text variant="bodyMedium">Cor: {data[0]?.data.color}</Text>
-      <Text variant="bodyMedium">Capacidade: {data[0]?.data.capacity}</Text>
-      <Text variant="bodyMedium">Preço: {data[0]?.data.price}</Text>
-      <Text variant="bodyMedium">Geração: {data[0]?.data.generation}</Text>
-      <Text variant="bodyMedium">Ano: {data[0]?.data.year}</Text>
+      <Text variant="bodyLarge">ID: {data.id}</Text>
+      <Text variant="titleLarge">Nome: {data.name}</Text>
+      <Text variant="bodyMedium">Cor: {data.data?.color}</Text>
+      <Text variant="bodyMedium">Capacidade: {data.data?.capacity}</Text>
+      <Text variant="bodyMedium">Preço: {data.data?.price}</Text>
+      <Text variant="bodyMedium">Geração: {data.data?.generation}</Text>
+      <Text variant="bodyMedium">Ano: {data.data?.year}</Text>
     </View>
   );
 }
