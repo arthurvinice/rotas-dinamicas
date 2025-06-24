@@ -14,12 +14,33 @@ export default function TelefoneDetalhe() {
   const [data, setData] = useState<ItemType | null >(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
+  function ajusteData(obj: Record<string, any>) {
+    const novoObj: Record<string, any> = {};
+    //converter pra letras minúsculas
+    for (const chave in obj) {
+      novoObj[chave.toLowerCase()] = obj[chave];
+    }
+    return novoObj;
+  }
+
   //função para chamar a API e obter os dados
   async function buscarDadosEspecificos() {
     setIsLoading(true);
-    const resultado = await axios.get('https://api.restful-api.dev/objects/' + id);
-    setData(resultado.data);
-    setIsLoading(false);
+    try {
+      const resultado = await axios.get('https://api.restful-api.dev/objects/' + id);
+
+      const dados = resultado.data;
+      if (dados.data) {
+        dados.data = ajusteData(dados.data);
+      }
+
+      setData(dados);
+    } catch (error) {
+      console.error("Erro ao buscar dados:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
