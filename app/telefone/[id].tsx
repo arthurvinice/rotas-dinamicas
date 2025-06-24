@@ -28,9 +28,11 @@ export default function TelefoneDetalhe() {
   
 
   useLayoutEffect(() => {
-    navigation.setOptions({
-      title: `Detalhe do telefone: ${data?.name || ''}`,
-    });
+    if (data) {
+      navigation.setOptions({
+        title: `Detalhe do telefone: ${data?.name || ''}`,
+      });
+    }
   }, [navigation, id]);
 
   if (isLoading) {
@@ -45,12 +47,20 @@ export default function TelefoneDetalhe() {
     <View style={styles.container}>
       <Text variant="bodyLarge">ID: {data.id}</Text>
       <Text variant="titleLarge">Nome: {data.name}</Text>
-      <Text variant="bodyMedium">Cor: {data.data?.color}</Text>
-      <Text variant="bodyMedium">Capacidade: {data.data?.capacity}</Text>
-      <Text variant="bodyMedium">Preço: {data.data?.price}</Text>
-      <Text variant="bodyMedium">Geração: {data.data?.generation}</Text>
-      <Text variant="bodyMedium">Ano: {data.data?.year}</Text>
+
+      {data.data ? (
+        <>
+          <Text variant="bodyMedium">Cor: {data.data.color ?? 'Não informado'}</Text>
+          <Text variant="bodyMedium">Capacidade: {data.data.capacity ?? 'Não informado'}</Text>
+          <Text variant="bodyMedium">Preço: {data.data.price ?? 'Não informado'}</Text>
+          <Text variant="bodyMedium">Geração: {data.data.generation ?? 'Não informado'}</Text>
+          <Text variant="bodyMedium">Ano: {data.data.year ?? 'Não informado'}</Text>
+        </>
+      ) : (
+        <Text variant="bodyMedium">Dados adicionais não informados.</Text>
+      )}
     </View>
+
   );
 }
 
