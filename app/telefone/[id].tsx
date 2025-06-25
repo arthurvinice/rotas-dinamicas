@@ -11,6 +11,7 @@ export default function TelefoneDetalhe() {
 
   const navigation = useNavigation();
   
+  //setando objeto do tipo ItemType, com estado inicial nulo
   const [data, setData] = useState<ItemType | null >(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,7 +55,7 @@ export default function TelefoneDetalhe() {
         title: `Detalhe do telefone: ${data?.name || ''}`,
       });
     }
-  }, [navigation, id]);
+  }, [navigation, data]);
 
   if (isLoading) {
       return (
